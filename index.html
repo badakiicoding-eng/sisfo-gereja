@@ -13,6 +13,10 @@
         :root {
             --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%);
             --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            /* Gradasi mewah baru untuk menggantikan warna putih polos */
+            --luxury-white-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.85) 100%);
+            --card-hover-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.25);
+            --luxury-shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.08);
         }
 
         body {
@@ -23,40 +27,79 @@
             scroll-behavior: smooth;
         }
 
-        /* Hero Section */
-        .hero-section {
+        /* Sistem Animasi Progresif */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Banner Teks Berjalan (Marquee) di bawah Navbar */
+        .running-text-bar {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: #ffffff;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 74px;
+            /* Menyesuaikan tinggi fixed-top navbar */
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Carousel Section */
+        .hero-carousel-item {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 58, 138, 0.85)),
                 url('assets/img/bg.jpeg') no-repeat center center;
             background-size: cover;
             color: white;
-            padding: 130px 0 90px 0;
-            position: relative;
+            padding: 120px 0 100px 0;
+            min-height: 80vh;
         }
 
-        /* Kartu Hero Sisi Kanan dengan Background bg.jpeg */
+        /* Kartu Hero Sisi Kanan dengan Background bg.jpeg & Gradasi Unik */
         .hero-card-bg {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 58, 138, 0.75)),
                 url('assets/img/bg.jpeg') no-repeat center center;
             background-size: cover;
             backdrop-filter: blur(8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Efek Animasi Kartu & Fitur */
+        /* Kartu Konten Standar dengan Gradasi Putih Mewah */
         .feature-card,
-        .info-card,
         .gallery-card {
-            background: #ffffff;
-            border-radius: 1rem;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: var(--luxury-white-gradient);
+            border-radius: 1.25rem;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: var(--luxury-shadow);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Kartu Info Khusus dengan Gradasi Putih Mewah Mengkilap */
+        .info-card {
+            background: var(--luxury-white-gradient);
+            border-radius: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: var(--luxury-shadow);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .feature-card:hover,
         .info-card:hover,
         .gallery-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+            box-shadow: var(--card-hover-shadow);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         /* Tombol Mewah dengan Gradasi */
@@ -73,16 +116,16 @@
 
         .btn-luxury:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
             color: white;
             background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         }
 
         /* Navbar Glassmorphism */
         .navbar-custom {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
         }
 
         footer {
@@ -116,58 +159,166 @@
                     </li>
                     <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#galeri">Galeri</a></li>
                     <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#tentang">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#kontak">Kontak</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section id="beranda" class="hero-section text-center text-lg-start d-flex align-items-center"
-        style="min-height: 90vh;">
-        <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-7">
-                    <span
-                        class="badge bg-primary bg-opacity-25 text-white px-3 py-2 rounded-pill mb-3 fw-semibold border border-primary border-opacity-50">
-                        <i class="bi bi-stars me-1"></i> Media Informasi & Administrasi Terpadu
-                    </span>
-                    <h1 class="display-4 fw-bold mb-3 tracking-tight">Sistem Informasi Manajemen Gereja </h1>
-                    <p class="lead text-white-50 mb-4" style="line-height: 1.6;">
-                        Pusat pengelolaan data jemaat, pelayanan sakramen, administrasi surat menyurat, serta laporan
-                        keuangan gereja yang cepat, transparan, dan responsif.
-                    </p>
-                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                        <a href="#fitur" class="btn btn-luxury btn-lg px-4 d-flex align-items-center gap-2">
-                            <span>Jelajahi Fitur</span>
-                            <i class="bi bi-arrow-down"></i>
-                        </a>
-                        <a href="#pengumuman" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold">Lihat
-                            Pengumuman</a>
+    <!-- TEKS BERJALAN (MARQUEE) DI BAWAH NAVBAR -->
+    <div class="running-text-bar">
+        <div class="container d-flex align-items-center">
+            <div class="badge bg-primary text-white me-3 px-2 py-1 flex-shrink-0">
+                <i class="bi bi-megaphone-fill me-1"></i> WARTA INFO
+            </div>
+            <marquee behavior="scroll" direction="left" scrollamount="5" class="mb-0 text-white-50">
+                <span class="text-white fw-semibold me-4">🕊️ Syalom! Selamat datang di Sistem Informasi Manajemen
+                    Gereja KINGMI Beth-ani Bomou I.</span>
+                <span class="text-white fw-semibold me-4">📅 Jadwal Ibadah Raya Minggu dilaksanakan pukul 09.00 WIT.
+                    Mari hadir tepat waktu.</span>
+                <span class="text-white fw-semibold">💡 Pengisian data pelayan dan warta jemaat dapat diakses melalui
+                    modul akun masing-masing sektor.</span>
+            </marquee>
+        </div>
+    </div>
+
+    <!-- HERO SECTION (SLIDE SHOW / CAROUSEL) -->
+    <section id="beranda" class="position-relative">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+            <!-- Indikator Carousel -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <!-- Wrapper Slide Show -->
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active hero-carousel-item d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-7">
+                                <span
+                                    class="badge bg-primary bg-opacity-25 text-white px-3 py-2 rounded-pill mb-3 fw-semibold border border-primary border-opacity-50">
+                                    <i class="bi bi-stars me-1"></i> Media Informasi & Administrasi Terpadu
+                                </span>
+                                <h1 class="display-4 fw-bold mb-3 tracking-tight">Sistem Informasi Manajemen Gereja</h1>
+                                <p class="lead text-white-50 mb-4" style="line-height: 1.6;">
+                                    Pusat pengelolaan data jemaat, pelayanan sakramen, administrasi surat menyurat,
+                                    serta laporan keuangan gereja yang cepat, transparan, dan responsif.
+                                </p>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <a href="#fitur" class="btn btn-luxury btn-lg px-4 d-flex align-items-center gap-2">
+                                        <span>Jelajahi Fitur</span>
+                                        <i class="bi bi-arrow-down"></i>
+                                    </a>
+                                    <a href="#pengumuman"
+                                        class="btn btn-outline-light btn-lg px-4 rounded-pill fw-semibold">Lihat
+                                        Pengumuman</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 text-center d-none d-lg-block">
+                                <div class="p-4 py-5 hero-card-bg rounded-4 shadow-lg">
+                                    <h3 class="fw-bold text-white mb-2">KINGMI Beth-ani Bomou I</h3>
+                                    <p class="text-white-50 small mb-0">Sistem Informasi Manajemen Pelayanan &
+                                        Administrasi Jemaat</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-5 text-center">
-                    <!-- Kotak sebelah kanan tanpa logo bulat, menggunakan background bg.jpeg -->
-                    <div class="p-4 py-5 hero-card-bg rounded-4 border border-white border-opacity-25 shadow-lg">
-                        <h3 class="fw-bold text-white mb-2">KINGMI Beth-ani Bomou I</h3>
-                        <p class="text-white-50 small mb-0">Sistem Informasi Manajemen Pelayanan & Administrasi Jemaat
-                        </p>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item hero-carousel-item d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-7">
+                                <span
+                                    class="badge bg-success bg-opacity-25 text-white px-3 py-2 rounded-pill mb-3 fw-semibold border border-success border-opacity-50">
+                                    <i class="bi bi-shield-check me-1"></i> Pengelolaan Data Terpadu
+                                </span>
+                                <h1 class="display-4 fw-bold mb-3 tracking-tight">Ketertiban Administrasi & Jemaat</h1>
+                                <p class="lead text-white-50 mb-4" style="line-height: 1.6;">
+                                    Memudahkan pencatatan data jemaat per sektor, pelaporan keuangan kas gereja, hingga
+                                    dokumentasi kegiatan peribadatan secara digital.
+                                </p>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <a href="#tentang"
+                                        class="btn btn-luxury btn-lg px-4 d-flex align-items-center gap-2">
+                                        <span>Pelajari Sistem</span>
+                                        <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 text-center d-none d-lg-block">
+                                <div class="p-4 py-5 hero-card-bg rounded-4 shadow-lg">
+                                    <h3 class="fw-bold text-white mb-2">Transparan & Akurat</h3>
+                                    <p class="text-white-50 small mb-0">Mendukung efisiensi pelayanan sekretariat gereja
+                                        modern</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item hero-carousel-item d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-7">
+                                <span
+                                    class="badge bg-warning bg-opacity-25 text-white px-3 py-2 rounded-pill mb-3 fw-semibold border border-warning border-opacity-50">
+                                    <i class="bi bi-geo-alt-fill me-1"></i> Pusat Informasi Wilayah
+                                </span>
+                                <h1 class="display-4 fw-bold mb-3 tracking-tight">Terhubung di Mana Saja</h1>
+                                <p class="lead text-white-50 mb-4" style="line-height: 1.6;">
+                                    Seluruh warga jemaat dapat memantau jadwal kegiatan, warta jemaat, dan pengumuman
+                                    penting gereja langsung dari perangkat genggam Anda.
+                                </p>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <a href="#kontak"
+                                        class="btn btn-luxury btn-lg px-4 d-flex align-items-center gap-2">
+                                        <span>Hubungi Sekretariat</span>
+                                        <i class="bi bi-headset"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 text-center d-none d-lg-block">
+                                <div class="p-4 py-5 hero-card-bg rounded-4 shadow-lg">
+                                    <h3 class="fw-bold text-white mb-2">Pelayanan Prima</h3>
+                                    <p class="text-white-50 small mb-0">Melayani dengan kasih dan kemajuan teknologi</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Tombol Navigasi Carousel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Sebelumnya</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Selanjutnya</span>
+            </button>
         </div>
     </section>
 
     <!-- FITUR UTAMA SECTION -->
     <section id="fitur" class="py-5 my-4">
         <div class="container py-4">
-            <div class="text-center mb-5">
+            <div class="text-center mb-5 reveal">
                 <h6 class="text-primary text-uppercase fw-bold tracking-wider small">Modul Unggulan</h6>
                 <h2 class="fw-bold text-dark">Fitur Utama Sistem Informasi</h2>
                 <p class="text-muted">Dirancang khusus untuk mempermudah tugas kesekretariatan dan pelayan gereja.</p>
             </div>
             <div class="row g-4">
                 <!-- Fitur 1 -->
-                <div class="col-md-4">
+                <div class="col-md-4 reveal">
                     <div class="feature-card p-4 h-100">
                         <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3 d-inline-flex mb-3 fs-4">
                             <i class="bi bi-people-fill"></i>
@@ -178,7 +329,7 @@
                     </div>
                 </div>
                 <!-- Fitur 2 -->
-                <div class="col-md-4">
+                <div class="col-md-4 reveal" style="transition-delay: 0.15s;">
                     <div class="feature-card p-4 h-100">
                         <div class="bg-success bg-opacity-10 text-success rounded-3 p-3 d-inline-flex mb-3 fs-4">
                             <i class="bi bi-award-fill"></i>
@@ -189,7 +340,7 @@
                     </div>
                 </div>
                 <!-- Fitur 3 -->
-                <div class="col-md-4">
+                <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
                     <div class="feature-card p-4 h-100">
                         <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3 d-inline-flex mb-3 fs-4">
                             <i class="bi bi-wallet2"></i>
@@ -206,20 +357,14 @@
     <!-- SECTION PENGUMUMAN -->
     <section id="pengumuman" class="py-5 bg-light">
         <div class="container py-4">
-            <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
-                <div>
-                    <h6 class="text-primary text-uppercase fw-bold tracking-wider small mb-1">Warta Jemaat</h6>
-                    <h2 class="fw-bold text-dark mb-0">Pengumuman & Informasi Terbaru</h2>
-                </div>
-                <button class="btn btn-primary d-flex align-items-center gap-2 rounded-pill px-4 shadow-sm"
-                    data-bs-toggle="modal" data-bs-target="#modalUploadPengumuman">
-                    <i class="bi bi-plus-circle-fill"></i> Upload Pengumuman Baru
-                </button>
+            <div class="text-center text-md-start mb-5 reveal">
+                <h6 class="text-primary text-uppercase fw-bold tracking-wider small mb-1">Warta Jemaat</h6>
+                <h2 class="fw-bold text-dark mb-0">Pengumuman & Informasi Terbaru</h2>
             </div>
             <div class="row g-4">
                 <!-- Item Pengumuman 1 -->
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm p-4">
+                <div class="col-md-4 reveal">
+                    <div class="card h-100 border-0 shadow-sm p-4 feature-card">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <span
                                 class="badge bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-pill small fw-semibold">Ibadah
@@ -236,8 +381,8 @@
                     </div>
                 </div>
                 <!-- Item Pengumuman 2 -->
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm p-4">
+                <div class="col-md-4 reveal" style="transition-delay: 0.15s;">
+                    <div class="card h-100 border-0 shadow-sm p-4 feature-card">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <span
                                 class="badge bg-success bg-opacity-10 text-success px-3 py-1 rounded-pill small fw-semibold">Pemuda
@@ -254,8 +399,8 @@
                     </div>
                 </div>
                 <!-- Item Pengumuman 3 -->
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm p-4">
+                <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
+                    <div class="card h-100 border-0 shadow-sm p-4 feature-card">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <span
                                 class="badge bg-warning bg-opacity-10 text-warning px-3 py-1 rounded-pill small fw-semibold">Pembangunan</span>
@@ -277,19 +422,13 @@
     <!-- SECTION GALERI -->
     <section id="galeri" class="py-5">
         <div class="container py-4">
-            <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
-                <div>
-                    <h6 class="text-primary text-uppercase fw-bold tracking-wider small mb-1">Dokumentasi</h6>
-                    <h2 class="fw-bold text-dark mb-0">Galeri Kegiatan Jemaat</h2>
-                </div>
-                <button class="btn btn-success d-flex align-items-center gap-2 rounded-pill px-4 shadow-sm"
-                    data-bs-toggle="modal" data-bs-target="#modalUploadGaleri">
-                    <i class="bi bi-camera-fill"></i> Upload Foto Galeri
-                </button>
+            <div class="text-center text-md-start mb-5 reveal">
+                <h6 class="text-primary text-uppercase fw-bold tracking-wider small mb-1">Dokumentasi</h6>
+                <h2 class="fw-bold text-dark mb-0">Galeri Kegiatan Jemaat</h2>
             </div>
             <div class="row g-4">
                 <!-- Foto Galeri 1 -->
-                <div class="col-md-4">
+                <div class="col-md-4 reveal">
                     <div class="gallery-card overflow-hidden h-100">
                         <div class="bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center"
                             style="height: 220px;">
@@ -302,7 +441,7 @@
                     </div>
                 </div>
                 <!-- Foto Galeri 2 -->
-                <div class="col-md-4">
+                <div class="col-md-4 reveal" style="transition-delay: 0.15s;">
                     <div class="gallery-card overflow-hidden h-100">
                         <div class="bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center"
                             style="height: 220px;">
@@ -315,7 +454,7 @@
                     </div>
                 </div>
                 <!-- Foto Galeri 3 -->
-                <div class="col-md-4">
+                <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
                     <div class="gallery-card overflow-hidden h-100">
                         <div class="bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center"
                             style="height: 220px;">
@@ -335,7 +474,7 @@
     <section id="tentang" class="py-5 bg-light border-top border-bottom">
         <div class="container py-4">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6">
+                <div class="col-lg-6 reveal">
                     <h6 class="text-primary text-uppercase fw-bold small">Transformasi Digital</h6>
                     <h2 class="fw-bold text-dark mb-3">Mendukung Pelayanan Lewat Teknologi Modern</h2>
                     <p class="text-muted mb-4">
@@ -352,12 +491,62 @@
                             bagi jemaat</li>
                     </ul>
                 </div>
-                <div class="col-lg-6">
-                    <div class="info-card p-4 p-md-5 bg-white text-center shadow-lg">
+                <div class="col-lg-6 reveal" style="transition-delay: 0.2s;">
+                    <div class="info-card p-4 p-md-5 text-center shadow-lg">
                         <i class="bi bi-info-circle-fill text-primary display-3 mb-3"></i>
                         <h4 class="fw-bold text-dark mb-2">Pusat Media Informasi</h4>
                         <p class="text-muted small mb-0">Halaman ini dirancang untuk memberikan kemudahan akses
                             informasi bagi seluruh warga jemaat di mana saja dan kapan saja secara terbuka.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION KONTAK / SEKRETARIAT -->
+    <section id="kontak" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5 reveal">
+                <h6 class="text-primary text-uppercase fw-bold tracking-wider small">Hubungi Kami</h6>
+                <h2 class="fw-bold text-dark">Sekretariat & Layanan Jemaat</h2>
+                <p class="text-muted">Silakan hubungi atau kunjungi kantor sekretariat gereja untuk keperluan
+                    administrasi dan pelayanan.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <!-- Kontak 1: Alamat -->
+                <div class="col-md-4 reveal">
+                    <div class="feature-card p-4 h-100 text-center">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 d-inline-flex mb-3 fs-4"
+                            style="width: 70px; height: 70px; align-items: center; justify-content: center;">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Lokasi Sekretariat</h5>
+                        <p class="text-muted small mb-0">Kompleks Gedung Gereja KINGMI Beth-ani Bomou I, Wilayah
+                            Pelayanan Papua.</p>
+                    </div>
+                </div>
+                <!-- Kontak 2: Jam Pelayanan -->
+                <div class="col-md-4 reveal" style="transition-delay: 0.15s;">
+                    <div class="feature-card p-4 h-100 text-center">
+                        <div class="bg-success bg-opacity-10 text-success rounded-circle p-3 d-inline-flex mb-3 fs-4"
+                            style="width: 70px; height: 70px; align-items: center; justify-content: center;">
+                            <i class="bi bi-clock-fill"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Jam Kerja Pelayanan</h5>
+                        <p class="text-muted small mb-0">Selasa – Jumat: 09.00 - 15.00 WIT<br>Sabtu: 09.00 - 13.00 WIT
+                        </p>
+                    </div>
+                </div>
+                <!-- Kontak 3: Hotline / Email -->
+                <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
+                    <div class="feature-card p-4 h-100 text-center">
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-3 d-inline-flex mb-3 fs-4"
+                            style="width: 70px; height: 70px; align-items: center; justify-content: center;">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Layanan Digital</h5>
+                        <p class="text-muted small mb-0">Email: info@sisfo-gereja.org<br>WhatsApp Sekretariat: +62
+                            812-3456-7890</p>
                     </div>
                 </div>
             </div>
@@ -373,83 +562,33 @@
         </div>
     </footer>
 
-    <!-- MODAL UPLOAD PENGUMUMAN -->
-    <div class="modal fade" id="modalUploadPengumuman" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg rounded-4">
-                <div class="modal-header bg-primary text-white rounded-top-4">
-                    <h5 class="modal-title fw-bold fs-6"><i class="bi bi-plus-circle me-2"></i> Form Upload Pengumuman
-                        Baru</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form
-                        onsubmit="event.preventDefault(); alert('Simulasi: Pengumuman berhasil diunggah!'); bootstrap.Modal.getInstance(document.getElementById('modalUploadPengumuman')).hide();">
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Judul Pengumuman</label>
-                            <input type="text" class="form-control" placeholder="Contoh: Ibadah Padang Sektor..."
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Kategori</label>
-                            <select class="form-select">
-                                <option>Ibadah Raya</option>
-                                <option>Pemuda / Remaja</option>
-                                <option>Pembangunan</option>
-                                <option>Sekolah Minggu</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Tanggal Kegiatan</label>
-                            <input type="date" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Isi / Keterangan Lengkap</label>
-                            <textarea class="form-control" rows="3" placeholder="Tuliskan isi pengumuman..."
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 fw-bold py-2 rounded-3">Simpan &
-                            Publikasikan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL UPLOAD GALERI -->
-    <div class="modal fade" id="modalUploadGaleri" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg rounded-4">
-                <div class="modal-header bg-success text-white rounded-top-4">
-                    <h5 class="modal-title fw-bold fs-6"><i class="bi bi-camera me-2"></i> Form Upload Foto Galeri</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form
-                        onsubmit="event.preventDefault(); alert('Simulasi: Foto galeri berhasil diunggah!'); bootstrap.Modal.getInstance(document.getElementById('modalUploadGaleri')).hide();">
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Judul Kegiatan / Foto</label>
-                            <input type="text" class="form-control" placeholder="Contoh: Perayaan Natal Jemaat..."
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Pilih Berkas Foto</label>
-                            <input type="file" class="form-control" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Deskripsi Singkat</label>
-                            <textarea class="form-control" rows="2"
-                                placeholder="Keterangan singkat momen foto..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success w-100 fw-bold py-2 rounded-3">Upload Foto</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap 5.3.2 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script Observer untuk Animasi Scroll Dinamis -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Hentikan pengamatan setelah animasi berjalan agar tetap mulus
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 
 </html>
