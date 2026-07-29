@@ -12,8 +12,7 @@
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%);
-            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            /* Gradasi mewah baru untuk menggantikan warna putih polos */
+            --accent-gradient: linear-gradient(135deg, #3b82f6 100%, #1d4ed8 100%);
             --luxury-white-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.85) 100%);
             --card-hover-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.25);
             --luxury-shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.08);
@@ -44,11 +43,10 @@
         .running-text-bar {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: #ffffff;
-            padding: 10px 0;
-            font-size: 0.9rem;
+            padding: 8px 0;
+            font-size: 0.85rem;
             font-weight: 500;
-            margin-top: 74px;
-            /* Menyesuaikan tinggi fixed-top navbar */
+            margin-top: 66px;
             border-bottom: 2px solid rgba(59, 130, 246, 0.3);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
@@ -63,7 +61,6 @@
             min-height: 80vh;
         }
 
-        /* Kartu Hero Sisi Kanan dengan Background bg.jpeg & Gradasi Unik */
         .hero-card-bg {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 58, 138, 0.75)),
                 url('assets/img/bg.jpeg') no-repeat center center;
@@ -73,7 +70,6 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Kartu Konten Standar dengan Gradasi Putih Mewah */
         .feature-card,
         .gallery-card {
             background: var(--luxury-white-gradient);
@@ -84,7 +80,6 @@
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Kartu Info Khusus dengan Gradasi Putih Mewah Mengkilap */
         .info-card {
             background: var(--luxury-white-gradient);
             border-radius: 1.25rem;
@@ -102,7 +97,6 @@
             border-color: rgba(59, 130, 246, 0.3);
         }
 
-        /* Tombol Mewah dengan Gradasi */
         .btn-luxury {
             background: var(--accent-gradient);
             border: none;
@@ -123,9 +117,47 @@
 
         /* Navbar Glassmorphism */
         .navbar-custom {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Penyesuaian khusus tampilan HP (Mobile Responsive) */
+        @media (max-width: 991.98px) {
+            .navbar-brand {
+                max-width: 78%;
+            }
+
+            .navbar-brand img {
+                width: 32px !important;
+                height: 32px !important;
+            }
+
+            .navbar-brand .logo-container {
+                width: 34px !important;
+                height: 34px !important;
+            }
+
+            .navbar-brand .brand-title {
+                font-size: 0.9rem !important;
+            }
+
+            .navbar-brand .brand-subtitle {
+                font-size: 0.62rem !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 220px;
+            }
+
+            .navbar-toggler {
+                padding: 0.25rem 0.5rem;
+                font-size: 1rem;
+            }
+
+            .running-text-bar {
+                margin-top: 60px;
+            }
         }
 
         footer {
@@ -138,32 +170,40 @@
 <body>
 
     <!-- NAVBAR INFORMASI -->
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top py-3">
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold text-dark d-flex align-items-center gap-2" href="#">
-                <div class="rounded-circle overflow-hidden shadow-sm border border-primary border-opacity-25 d-flex align-items-center justify-content-center bg-white"
-                    style="width: 42px; height: 42px; flex-shrink: 0;">
+                <div class="logo-container rounded-circle overflow-hidden shadow-sm border border-primary border-opacity-25 d-flex align-items-center justify-content-center bg-white"
+                    style="width: 38px; height: 38px; flex-shrink: 0;">
                     <img src="assets/img/logo.png" alt="Logo" class="img-fluid object-fit-cover"
                         style="width: 100%; height: 100%;">
                 </div>
                 <div class="d-flex flex-column">
-                    <span style="font-size: 1.05rem; letter-spacing: 0.5px;">SISFO-GEREJA</span>
-                    <span class="text-muted fw-normal" style="font-size: 0.72rem; line-height: 1.1;">Sistem Informasi
-                        Gereja Kemah Injil (KINGMI) Bomou I</span>
+                    <span class="brand-title" style="font-size: 1rem; letter-spacing: 0.5px;">SISFO-GEREJA</span>
+                    <span class="brand-subtitle text-muted fw-normal"
+                        style="font-size: 0.68rem; line-height: 1.1;">Sistem Informasi Gereja Kemah Injil (KINGMI) Bomou
+                        I</span>
                 </div>
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center gap-3">
-                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#beranda">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#fitur">Fitur Sistem</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#pengumuman">Pengumuman</a>
+            <div class="collapse navbar-collapse justify-content-end bg-white bg-opacity-95 p-3 p-lg-0 rounded-3 mt-2 mt-lg-0 shadow-sm shadow-lg-none"
+                id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-2 gap-lg-3">
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark px-2 py-1" href="#beranda">Beranda</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#galeri">Galeri</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#tentang">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#kontak">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark px-2 py-1" href="#fitur">Fitur
+                            Sistem</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark px-2 py-1"
+                            href="#pengumuman">Pengumuman</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark px-2 py-1" href="#galeri">Galeri</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark px-2 py-1" href="#tentang">Tentang</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark px-2 py-1" href="#kontak">Kontak</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -172,7 +212,7 @@
     <!-- TEKS BERJALAN (MARQUEE) DI BAWAH NAVBAR -->
     <div class="running-text-bar">
         <div class="container d-flex align-items-center">
-            <div class="badge bg-primary text-white me-3 px-2 py-1 flex-shrink-0">
+            <div class="badge bg-primary text-white me-3 px-2 py-1 flex-shrink-0" style="font-size: 0.75rem;">
                 <i class="bi bi-megaphone-fill me-1"></i> WARTA INFO
             </div>
             <marquee behavior="scroll" direction="left" scrollamount="5" class="mb-0 text-white-50">
@@ -582,7 +622,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // Hentikan pengamatan setelah animasi berjalan agar tetap mulus
                         observer.unobserve(entry.target);
                     }
                 });
